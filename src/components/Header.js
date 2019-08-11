@@ -4,7 +4,7 @@ function Header() {
     return (
          <header className="app-header">
             <nav>
-                <h1><a href="/">Restaurant Reviews</a></h1>
+                <h1><a href="/">Foodie Nest</a></h1>
             </nav>
         </header>
     )
