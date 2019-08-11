@@ -12,8 +12,11 @@ class App extends React.Component {
     super();
     this.state = {
       categories: [],
-      selectedCuisine: '',
-      selectedNeighborhood: ''
+      neighborhoods: [],
+      cuisines: [],
+      selectCategory: '',
+      selectCuisine: '',
+      selectNeighborhood: ''
     }
   }
 
@@ -39,21 +42,19 @@ class App extends React.Component {
 
   
   onSelectChange = (event) => {
-    console.log('Option selected!');
-    console.log(event.target);
+    const value = event.target.value;
+    const name = event.target.name;
+    this.setState({ [ name ]: value }, () => console.log('State changed: ', this.state.selectCategory ))
   }
 
 
-  fillCategoriesHTML = () => {
-    console.log('Categories set in state!');
-  }
 
   updateRestaurants = () => {
     Helper.fetchCategories((error, categories) => {
       if (error) { 
         console.error(error);
       } else {
-        this.setState({ categories }, () => this.fillCategoriesHTML());
+        this.setState({ categories });
       }
     });
   }
@@ -64,6 +65,8 @@ class App extends React.Component {
   }
 
   render() {
+    const { categories, neighborhoods, cuisines } = this.state;
+
     return (
       <div className="app">
         <Header />
@@ -74,6 +77,9 @@ class App extends React.Component {
           <section id="restaurants-container">
               <div className="filter-options">
                 <Form 
+                  categories={categories}
+                  neighborhoods={neighborhoods}
+                  cuisines={cuisines}
                   onChange={this.onSelectChange}
                 />
               </div>

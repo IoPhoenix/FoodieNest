@@ -1,4 +1,4 @@
-import { USER_KEY, CITY_ID } from './constants';
+import { USER_KEY, CITY_ID, LIMIT } from './constants';
 
 class Helper {
 
@@ -9,7 +9,7 @@ class Helper {
 
     static async fetchCategories(callback) {
         try {
-            const url = `${this.DATABASE_URL}/collections?city_id=${CITY_ID}&count=5`;
+            const url = `${this.DATABASE_URL}/collections?city_id=${CITY_ID}&count=${LIMIT}`;
             const data = await fetch(url, 
                 {
                     method: 'GET',
