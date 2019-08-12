@@ -99,7 +99,7 @@ class App extends React.Component {
 
 
   render() {
-    const { restaurants, categories, neighborhoods, cuisines } = this.state;
+    const { restaurants, categories, neighborhoods, cuisines, selectCategory } = this.state;
 
     return (
       <div className="app">
@@ -112,6 +112,7 @@ class App extends React.Component {
           <Grid container justify="center">
               <div className="filter-options">
                 <Form 
+                  selectCategory={selectCategory}
                   categories={categories}
                   neighborhoods={neighborhoods}
                   cuisines={cuisines}
