@@ -1,4 +1,4 @@
-import { USER_KEY, CITY_ID, LIMIT } from './constants';
+import { USER_KEY, CITY_ID, LIMIT, ENTITY_TYPE } from './constants';
 
 class Helper {
 
@@ -9,7 +9,7 @@ class Helper {
 
     static async fetchCategories(callback) {
         try {
-            const url = `${this.DATABASE_URL}/collections?city_id=${CITY_ID}&count=${LIMIT}`;
+            const url = `${Helper.DATABASE_URL}/collections?city_id=${CITY_ID}&count=${LIMIT}`;
             const data = await fetch(url, 
                 {
                     method: 'GET',
@@ -28,7 +28,51 @@ class Helper {
         } catch(err) {
             console.log('Error fetching categories: ', err);
         }
+    }
+
+
+    static async fetchRestaurants(callback) {
+        try {
+            const url = `${Helper.DATABASE_URL}/search?entity_id=${CITY_ID}&entity_type=${ENTITY_TYPE}&count=${LIMIT}`;
+            const data = await fetch(url,
+                {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'user-key': USER_KEY
+                    }
+                });
+          const json = await data.json();
+          callback(null, json.restaurants);
+          
+        } catch(err) {
+          console.log('Error fetching restaurants: ', err);
+        }
       }
+  
+      
+    static fetchAllRestaurants = (category, neighborhood, cuisine, callback) => {
+
+        // Fetch all restaurants
+        Helper.fetchRestaurants((error, restaurants) => {
+            if (error) {
+                callback(error, null);
+            } else {
+                let results = restaurants;
+                if (category !== 'all') { // filter by category
+                    
+                }
+
+                if (cuisine !== 'all') { // filter by cuisine
+                }
+
+                if (neighborhood !== 'all') { // filter by neighborhood
+                }
+
+                callback(null, results);
+            }
+        });
+    }
 }
 
 export default Helper;

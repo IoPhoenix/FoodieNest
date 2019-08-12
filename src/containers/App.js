@@ -11,12 +11,13 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
+      restaurants: [],
       categories: [],
       neighborhoods: [],
       cuisines: [],
-      selectCategory: '',
-      selectCuisine: '',
-      selectNeighborhood: ''
+      selectCategory: 'all',
+      selectNeighborhood: 'all',
+      selectCuisine: 'all',
     }
   }
 
@@ -38,6 +39,8 @@ class App extends React.Component {
     }).addTo(map);
 
     this.updateRestaurants();
+    this.fetchNeighborhoods();
+    this.fetchCuisines();
   }
 
   
@@ -48,24 +51,54 @@ class App extends React.Component {
   }
 
 
+  fetchNeighborhoods = () => {
 
-  updateRestaurants = () => {
+  }
+
+
+  fetchCuisines = () => {
+
+  }
+
+
+  fetchCategories = () => {
     Helper.fetchCategories((error, categories) => {
       if (error) { 
         console.error(error);
       } else {
-        this.setState({ categories });
+        this.setState({ categories }, () => console.log('State changed: ', this.state.categories ));
       }
     });
   }
+
   
+  updateRestaurants = () => {
+    const { selectCategory, selectNeighborhood, selectCuisine } = this.state;
+
+    Helper.fetchAllRestaurants(selectCategory, selectNeighborhood, selectCuisine, (error, restaurants) => {
+      if (error) {
+        console.error(error);
+      } else {
+        this.resetRestaurants(restaurants);
+        this.setState({ restaurants });
+      }
+    });
+  }
+
+  
+  resetRestaurants = (restaurants) => {
+     // Remove all map markers
+  }
+
 
   componentDidMount() {
     this.initMap();
+    this.fetchCategories();
   }
 
+
   render() {
-    const { categories, neighborhoods, cuisines } = this.state;
+    const { restaurants, categories, neighborhoods, cuisines } = this.state;
 
     return (
       <div className="app">
@@ -83,7 +116,7 @@ class App extends React.Component {
                   onChange={this.onSelectChange}
                 />
               </div>
-              <RestaurantsList />
+              <RestaurantsList restaurants={restaurants}/>
             </section>
         </main>
       </div>
