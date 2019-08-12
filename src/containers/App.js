@@ -6,6 +6,7 @@ import RestaurantsList from '../components/RestaurantsList';
 import './App.css';
 import Header from '../components/Header';
 import Helper from '../helpers';
+import { Grid } from "@material-ui/core";
 
 class App extends React.Component {
   constructor() {
@@ -107,7 +108,8 @@ class App extends React.Component {
           <section id="map-container">
             <Map />
           </section>
-          <section id="restaurants-container">
+
+          <Grid container justify="center">
               <div className="filter-options">
                 <Form 
                   categories={categories}
@@ -117,7 +119,7 @@ class App extends React.Component {
                 />
               </div>
               <RestaurantsList restaurants={restaurants}/>
-            </section>
+          </Grid>
         </main>
       </div>
     );
