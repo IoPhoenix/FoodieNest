@@ -22,7 +22,9 @@ class Helper {
             const json = await data.json();
 
             // Get ids and titles for all categories:
-            const categories = json.collections.map(item => item.collection.title);
+            const categories = json.collections
+                                            .map(item => item.collection.title)
+                                            .sort();
             callback(null, categories);
 
         } catch(err) {
@@ -37,10 +39,12 @@ class Helper {
             callback(error, null);
           } else {
             // Get all neighborhoods from all restaurants
-            const neighborhoods = restaurants.map(item => item.restaurant.location.locality);
+            const neighborhoods = restaurants.
+                                        map(item => item.restaurant.location.locality)
+                                        .sort();
 
             // Remove duplicates from neighborhoods
-            const uniqueNeighborhoods = neighborhoods.filter((res, i) => neighborhoods.indexOf(res) === i);
+            const uniqueNeighborhoods = neighborhoods.filter((item, i) => neighborhoods.indexOf(item) === i);
             callback(null, uniqueNeighborhoods);
           }
         });
@@ -53,10 +57,13 @@ class Helper {
             callback(error, null);
           } else {
             // Get all cuisines from all restaurants
-            const cuisines = restaurants.map(item => item.restaurant.cuisines);
-            
+            const cuisines = restaurants
+                                .map(item => item.restaurant.cuisines.split(', '))
+                                .reduce((acc, val) => acc.concat(val))
+                                .sort();
+
             // Remove duplicates from cuisines
-            const uniqueCuisines = cuisines.filter((res, i) => cuisines.indexOf(res) === i);
+            const uniqueCuisines = cuisines.filter((item, i) => cuisines.indexOf(item) === i);
             callback(null, uniqueCuisines);
           }
         });
