@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
     flexWrap: 'wrap',
   },
   formControl: {
-    margin: theme.spacing(1),
+    margin: theme.spacing(2),
     minWidth: 200,
   }
 }));
@@ -42,8 +42,8 @@ function Form(props) {
 
 
     return (
-      <Grid container>
-        <form className={classes.root} autoComplete="off">
+      <Grid container justify="center">
+        <form className={classes.root}>
           <Grid item>
             <FormControl className={classes.formControl}>
               <InputLabel htmlFor="categories-select">Select category</InputLabel>

@@ -6,7 +6,7 @@ import { Grid } from "@material-ui/core";
 function RestaurantsList(props) {
 
     return (
-        <Grid item xs={12} sm={11} container spacing={8}>
+        <Grid item xs={12} sm={11} container spacing={6}>
             { props.restaurants.map(item => {
                 return (
                     <Grid item xs={12} sm={6} lg={4} key={item.restaurant.id}>
