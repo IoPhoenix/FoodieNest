@@ -110,15 +110,12 @@ class App extends React.Component {
           </section>
 
           <Grid container justify="center">
-              <div className="filter-options">
-                <Form 
+              <Form 
                   selectCategory={selectCategory}
                   categories={categories}
                   neighborhoods={neighborhoods}
                   cuisines={cuisines}
-                  onChange={this.onSelectChange}
-                />
-              </div>
+                  onChange={this.onSelectChange} />
               <RestaurantsList restaurants={restaurants}/>
           </Grid>
         </main>
