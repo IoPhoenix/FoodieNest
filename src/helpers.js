@@ -39,8 +39,8 @@ class Helper {
             callback(error, null);
           } else {
             // Get all neighborhoods from all restaurants
-            const neighborhoods = restaurants.
-                                        map(item => item.restaurant.location.locality)
+            const neighborhoods = restaurants
+                                        .map(item => item.restaurant.location.locality)
                                         .sort();
 
             // Remove duplicates from neighborhoods
@@ -113,6 +113,8 @@ class Helper {
             }
         });
     }
+
+  
 }
 
 export default Helper;

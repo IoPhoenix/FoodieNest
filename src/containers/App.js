@@ -8,11 +8,14 @@ import Header from '../components/Header';
 import Helper from '../helpers';
 import { Grid } from "@material-ui/core";
 
+
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
+      map: null,
       restaurants: [],
+      markers: [],
       categories: [],
       neighborhoods: [],
       cuisines: [],
@@ -47,6 +50,7 @@ class App extends React.Component {
       id: 'mapbox.streets'
     }).addTo(map);
 
+    this.setState({ map });
     this.updateRestaurants();
   }
 
@@ -59,7 +63,7 @@ class App extends React.Component {
         console.error(error);
       } else {
         this.resetRestaurants(restaurants);
-        this.setState({ restaurants });
+        this.setState({ restaurants }, this.addMarkersToMap);
       }
     });
   }
@@ -104,7 +108,24 @@ class App extends React.Component {
     });
   }
 
-  
+  addMarkersToMap = () => {
+    this.state.restaurants.forEach(item => {
+      const marker = this.createMarkerFor(item.restaurant);
+      
+      this.setState({ markers: this.state.markers.concat(marker) });
+    });
+  }
+
+  createMarkerFor(restaurant) {
+    const marker = new Leaflet.marker([restaurant.location.latitude, restaurant.location.longitude], {
+        title: restaurant.name,
+        alt: 'Marker for ' + restaurant.name,
+        riseOnHover: true
+      });
+      marker.addTo(this.state.map);
+      return marker;
+  } 
+
   resetRestaurants = (restaurants) => {
      // Remove all map markers
   }
