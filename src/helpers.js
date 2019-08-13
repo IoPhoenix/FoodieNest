@@ -22,12 +22,44 @@ class Helper {
             const json = await data.json();
 
             // Get ids and titles for all categories:
-            const categories = json.collections.map(item => [item.collection.collection_id, item.collection.title]);
+            const categories = json.collections.map(item => item.collection.title);
             callback(null, categories);
 
         } catch(err) {
             console.log('Error fetching categories: ', err);
         }
+    }
+
+
+    static fetchNeighborhoods(callback) {
+        Helper.fetchRestaurants((error, restaurants) => {
+          if (error) {
+            callback(error, null);
+          } else {
+            // Get all neighborhoods from all restaurants
+            const neighborhoods = restaurants.map(item => item.restaurant.location.locality);
+
+            // Remove duplicates from neighborhoods
+            const uniqueNeighborhoods = neighborhoods.filter((res, i) => neighborhoods.indexOf(res) === i);
+            callback(null, uniqueNeighborhoods);
+          }
+        });
+    }
+    
+    
+      static fetchCuisines(callback) {
+        Helper.fetchRestaurants((error, restaurants) => {
+          if (error) {
+            callback(error, null);
+          } else {
+            // Get all cuisines from all restaurants
+            const cuisines = restaurants.map(item => item.restaurant.cuisines);
+            
+            // Remove duplicates from cuisines
+            const uniqueCuisines = cuisines.filter((res, i) => cuisines.indexOf(res) === i);
+            callback(null, uniqueCuisines);
+          }
+        });
     }
 
 
@@ -51,6 +83,7 @@ class Helper {
       }
   
       
+
     static fetchAllRestaurants = (category, neighborhood, cuisine, callback) => {
 
         // Fetch all restaurants

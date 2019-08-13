@@ -7,6 +7,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
+    margin:  `${theme.spacing(3)}px 0`
   },
   formControl: {
     margin: theme.spacing(2),
@@ -19,24 +20,24 @@ function Form(props) {
 
   const classes = useStyles();
 
-  const renderOption = (input) => {
+  const renderOption = (input, i) => {
     return <MenuItem 
-              key={input[0]} 
-              value={input[0]}>
-                {input[1]}
+              key={i} 
+              value={input}>
+                {input}
             </MenuItem>;
   }
 
-  const categories = props.categories.map(category => {
-    return renderOption(category);
+  const categories = props.categories.map((category, i) => {
+    return renderOption(category, i);
   });
 
-  const neighborhoods = props.neighborhoods.map(neighborhood => {
-    return renderOption(neighborhood);
+  const neighborhoods = props.neighborhoods.map((neighborhood, i) => {
+    return renderOption(neighborhood, i);
   });
 
-  const cuisines = props.cuisines.map(cuisine => {
-    return renderOption(cuisine);
+  const cuisines = props.cuisines.map((cuisine, i) => {
+    return renderOption(cuisine, i);
   });
 
 

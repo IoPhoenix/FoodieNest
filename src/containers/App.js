@@ -23,6 +23,14 @@ class App extends React.Component {
   }
 
 
+  componentDidMount() {
+    this.initMap();
+    this.fetchCategories();
+    this.fetchNeighborhoods();
+    this.fetchCuisines();
+  }
+
+
   initMap = () => {
     const map = Leaflet.map('map', {
       center: [37.7742, -122.417068],
@@ -40,36 +48,6 @@ class App extends React.Component {
     }).addTo(map);
 
     this.updateRestaurants();
-    this.fetchNeighborhoods();
-    this.fetchCuisines();
-  }
-
-  
-  onSelectChange = (event) => {
-    const value = event.target.value;
-    const name = event.target.name;
-    this.setState({ [ name ]: value }, () => console.log('State changed: ', this.state.selectCategory ))
-  }
-
-
-  fetchNeighborhoods = () => {
-
-  }
-
-
-  fetchCuisines = () => {
-
-  }
-
-
-  fetchCategories = () => {
-    Helper.fetchCategories((error, categories) => {
-      if (error) { 
-        console.error(error);
-      } else {
-        this.setState({ categories }, () => console.log('State changed: ', this.state.categories ));
-      }
-    });
   }
 
   
@@ -86,15 +64,49 @@ class App extends React.Component {
     });
   }
 
-  
-  resetRestaurants = (restaurants) => {
-     // Remove all map markers
+  onSelectChange = (event) => {
+    const value = event.target.value;
+    const name = event.target.name;
+    console.log('Option selected for : ', name, value );
+    this.setState({ [ name ]: value });
   }
 
 
-  componentDidMount() {
-    this.initMap();
-    this.fetchCategories();
+  fetchNeighborhoods = () => {
+    Helper.fetchNeighborhoods((error, neighborhoods) => {
+      if (error) {
+        console.error('Error fetching neighborhoods: ', error);
+      } else {
+        this.setState({ neighborhoods });
+      }
+    });
+  }
+
+
+  fetchCuisines = () => {
+    Helper.fetchCuisines((error, cuisines) => {
+      if (error) {
+        console.error('Error fetching cuisines: ', error);
+      } else {
+        this.setState({ cuisines });
+      }
+    });
+  }
+
+
+  fetchCategories = () => {
+    Helper.fetchCategories((error, categories) => {
+      if (error) { 
+        console.error(error);
+      } else {
+        this.setState({ categories });
+      }
+    });
+  }
+
+  
+  resetRestaurants = (restaurants) => {
+     // Remove all map markers
   }
 
 
