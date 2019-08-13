@@ -4,7 +4,6 @@ import Leaflet from 'leaflet';
 import Form from '../components/Form';
 import RestaurantsList from '../components/RestaurantsList';
 import './App.css';
-import Header from '../components/Header';
 import Helper from '../helpers';
 import { Grid } from "@material-ui/core";
 
@@ -108,6 +107,7 @@ class App extends React.Component {
     });
   }
 
+
   addMarkersToMap = () => {
     this.state.restaurants.forEach(item => {
       const marker = this.createMarkerFor(item.restaurant);
@@ -115,6 +115,7 @@ class App extends React.Component {
       this.setState({ markers: this.state.markers.concat(marker) });
     });
   }
+
 
   createMarkerFor(restaurant) {
     const marker = new Leaflet.marker([restaurant.location.latitude, restaurant.location.longitude], {
@@ -125,6 +126,7 @@ class App extends React.Component {
       marker.addTo(this.state.map);
       return marker;
   } 
+
 
   resetRestaurants = (restaurants) => {
      // Remove all map markers
@@ -143,24 +145,18 @@ class App extends React.Component {
 
     return (
       <div className="app">
-        <Header />
-        <main>
-          <section id="map-container">
-            <Map />
-          </section>
-
-          <Grid container justify="center">
-              <Form 
-                  selectCategory={selectCategory}
-                  selectNeighborhood={selectNeighborhood}
-                  selectCuisine={selectCuisine}
-                  categories={categories}
-                  neighborhoods={neighborhoods}
-                  cuisines={cuisines}
-                  onChange={this.onSelectChange} />
-              <RestaurantsList restaurants={restaurants}/>
+        <Map />
+        <Grid container justify="center">
+            <Form 
+                selectCategory={selectCategory}
+                selectNeighborhood={selectNeighborhood}
+                selectCuisine={selectCuisine}
+                categories={categories}
+                neighborhoods={neighborhoods}
+                cuisines={cuisines}
+                onChange={this.onSelectChange} />
+            <RestaurantsList restaurants={restaurants}/>
           </Grid>
-        </main>
       </div>
     );
   }
