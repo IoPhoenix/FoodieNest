@@ -10,6 +10,7 @@ import { Card,
         Button } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import { Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
@@ -43,7 +44,7 @@ const useStyles = makeStyles(theme => ({
 function Restaurant(props) {
 
     const classes = useStyles();
-    const { name, thumb } = props.restaurant;
+    const { name, thumb, id } = props.restaurant;
     const rating = parseFloat(props.restaurant.user_rating.aggregate_rating);
     const votes = props.restaurant.user_rating.votes;
     const { locality, address } = props.restaurant.location;
@@ -87,7 +88,8 @@ function Restaurant(props) {
                 <IconButton aria-label='add to favorites'>
                     <FavoriteIcon />
                 </IconButton>
-                <Button size='small' color='primary'>
+                
+                <Button component={Link} to={`/restaurant/${id}`} size='small' color='primary'>
                     View Restaurant Details
                 </Button>
             </CardActions>

@@ -147,16 +147,16 @@ class App extends React.Component {
       <div className="app">
         <Map />
         <Grid container justify="center">
-            <Form 
-                selectCategory={selectCategory}
-                selectNeighborhood={selectNeighborhood}
-                selectCuisine={selectCuisine}
-                categories={categories}
-                neighborhoods={neighborhoods}
-                cuisines={cuisines}
-                onChange={this.onSelectChange} />
-            <RestaurantsList restaurants={restaurants}/>
-          </Grid>
+          <Form 
+              selectCategory={selectCategory}
+              selectNeighborhood={selectNeighborhood}
+              selectCuisine={selectCuisine}
+              categories={categories}
+              neighborhoods={neighborhoods}
+              cuisines={cuisines}
+              onChange={this.onSelectChange} />
+          <RestaurantsList restaurants={restaurants}/>
+        </Grid>
       </div>
     );
   }

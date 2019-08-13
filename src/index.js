@@ -4,7 +4,8 @@ import './index.css';
 import App from './containers/App';
 import Header from './components/Header';
 import RestaurantPage from './components/RestaurantPage';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Notfound from './components/Notfound';
+import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
 
 import * as serviceWorker from './serviceWorker';
 
@@ -12,8 +13,11 @@ const routing = (
     <Router>
       <div>
         <Header />
-        <Route exact path="/" component={App} />
-        <Route path="/restaurant" component={RestaurantPage} />
+        <Switch>
+            <Route exact path="/" component={App} />
+            <Route path="/restaurant/:id" component={RestaurantPage} />
+            <Route component={Notfound} />
+        </Switch>
       </div>
     </Router>
 );
