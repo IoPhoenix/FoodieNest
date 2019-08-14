@@ -1,6 +1,5 @@
 import React from 'react';
 import Map from '../components/Map';
-import Leaflet from 'leaflet';
 import Form from '../components/Form';
 import RestaurantsList from '../components/RestaurantsList';
 import './App.css';

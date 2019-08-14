@@ -5,7 +5,7 @@ import App from './containers/App';
 import Header from './components/Header';
 import RestaurantPage from './components/RestaurantPage';
 import Notfound from './components/Notfound';
-import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 
 import * as serviceWorker from './serviceWorker';
 

@@ -89,8 +89,17 @@ function Restaurant(props) {
                     <FavoriteIcon />
                 </IconButton>
                 
-                <Button component={Link} to={`/restaurant/${id}`} size='small' color='primary'>
-                    View Restaurant Details
+                <Button
+                    component={Link}
+                    to={{
+                        pathname: `/restaurant/${id}`,
+                        state: {
+                            restaurant: props.restaurant
+                        }
+                    }}
+                    size='small'
+                    color='primary'>
+                        View Restaurant Details
                 </Button>
             </CardActions>
         </Card>
