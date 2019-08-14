@@ -1,4 +1,5 @@
 import { USER_KEY, CITY_ID, LIMIT, ENTITY_TYPE } from './constants';
+import Leaflet from 'leaflet';
 
 class Helper {
 
@@ -6,6 +7,37 @@ class Helper {
       return 'https://developers.zomato.com/api/v2.1';
     }
 
+
+    static initMap = () => {
+      const map = Leaflet.map('map', {
+        center: [37.7742, -122.417068],
+        zoom: 12,
+        scrollWheelZoom: false
+      });
+  
+      Leaflet.tileLayer('https://api.tiles.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.jpg70?access_token=pk.eyJ1IjoiaW9waG9lbml4IiwiYSI6ImNqa29peG82NzFtZHkzcXBjdm9mbmN2ZWkifQ.80oAZqBb8GPBVoI8xFZucA', {
+        mapboxToken: 'pk.eyJ1IjoiaW9waG9lbml4IiwiYSI6ImNqa29peG82NzFtZHkzcXBjdm9mbmN2ZWkifQ.80oAZqBb8GPBVoI8xFZucA',
+        maxZoom: 18,
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+          '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+          'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        id: 'mapbox.streets'
+      }).addTo(map);
+
+      return map;
+    }
+
+
+    static createMarkerFor(restaurant) {
+      const marker = new Leaflet.marker([restaurant.location.latitude, restaurant.location.longitude], {
+          title: restaurant.name,
+          alt: 'Marker for ' + restaurant.name,
+          riseOnHover: true
+        });
+        return marker;
+    } 
+
+    
 
     static async fetchCategories(callback) {
         try {
