@@ -134,25 +134,14 @@ class Helper {
   
       
 
-    static fetchAllRestaurants = (category, neighborhood, cuisine, callback) => {
+    static fetchAllRestaurants = (callback) => {
 
         // Fetch all restaurants
         Helper.fetchRestaurants((error, restaurants) => {
             if (error) {
                 callback(error, null);
             } else {
-                let results = restaurants;
-                if (category !== 'all') { // filter by category
-                    
-                }
-
-                if (cuisine !== 'all') { // filter by cuisine
-                }
-
-                if (neighborhood !== 'all') { // filter by neighborhood
-                }
-
-                callback(null, results);
+                callback(null, restaurants);
             }
         });
     }

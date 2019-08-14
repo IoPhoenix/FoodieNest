@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
 function Restaurant(props) {
 
     const classes = useStyles();
-    const { name, thumb, id } = props.restaurant;
+    const { name, thumb, id, cuisines } = props.restaurant;
     const rating = parseFloat(props.restaurant.user_rating.aggregate_rating);
     const votes = props.restaurant.user_rating.votes;
     const { locality, address } = props.restaurant.location;
@@ -72,6 +72,9 @@ function Restaurant(props) {
                         </Box>
                     </div>
                 </Box>
+                <Typography variant='body2'>
+                    { cuisines }
+                </Typography>
                 <Typography 
                     variant='subtitle1' 
                     gutterBottom>

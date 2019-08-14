@@ -40,13 +40,10 @@ class App extends React.Component {
 
   
   updateRestaurants = () => {
-    const { selectCategory, selectNeighborhood, selectCuisine } = this.state;
-
-    Helper.fetchAllRestaurants(selectCategory, selectNeighborhood, selectCuisine, (error, restaurants) => {
+    Helper.fetchAllRestaurants((error, restaurants) => {
       if (error) {
         console.error(error);
       } else {
-        this.resetRestaurants(restaurants);
         this.setState({ restaurants }, this.addMarkersToMap);
       }
     });
@@ -55,7 +52,7 @@ class App extends React.Component {
   onSelectChange = (event) => {
     const value = event.target.value;
     const name = event.target.name;
-    console.log('Option selected for : ', name, value );
+    console.log('Option selected: ', name, value );
     this.setState({ [ name ]: value });
   }
 
@@ -102,8 +99,34 @@ class App extends React.Component {
   }
 
 
-  resetRestaurants = (restaurants) => {
-     // Remove all map markers
+  matchNeighborhood = (item, search) => {
+    return item.restaurant.location.locality === search;
+  }
+
+
+  matchCuisine = (item, search) => {
+    return item.restaurant.cuisines.includes(search);
+  }
+
+
+  filterRestaurants = (restaurants, selectCa, selectN, selectCu) => {
+    let results = restaurants;
+
+    if (selectCa !== 'all') {}
+
+    if (selectN !== 'all') {
+      results = results.filter(item => this.matchNeighborhood(item, selectN));
+    }
+
+    if (selectCu !== 'all') {
+      results = results.filter(item => this.matchCuisine(item, selectCu));
+    }
+
+    if (selectN !== 'all' && selectCu !== 'all') {
+      results = results.filter(item => this.matchNeighborhood(item, selectN) && this.matchCuisine(item, selectCu));
+    }
+
+    return results;
   }
 
 
@@ -116,6 +139,7 @@ class App extends React.Component {
       selectCategory,
       selectNeighborhood,
       selectCuisine } = this.state;
+    
 
     return (
       <div className="app">
@@ -129,7 +153,10 @@ class App extends React.Component {
                 neighborhoods={neighborhoods}
                 cuisines={cuisines}
                 onChange={this.onSelectChange} />
-            <RestaurantsList restaurants={restaurants}/>
+            <RestaurantsList 
+              restaurants={
+                this.filterRestaurants(restaurants, selectCategory, selectNeighborhood, selectCuisine)
+              } />
         </Grid>
       </div>
     );
