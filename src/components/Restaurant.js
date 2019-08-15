@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
       }
     },
     media: {
-      paddingTop: '56.25%'
+      paddingTop: '63%'
     },
     content: {
       textAlign: 'left',
@@ -44,10 +44,14 @@ const useStyles = makeStyles(theme => ({
 function Restaurant(props) {
 
     const classes = useStyles();
-    const { name, thumb, id, cuisines } = props.restaurant;
+    const { name, thumb, id, cuisines, price_range } = props.restaurant;
     const rating = parseFloat(props.restaurant.user_rating.aggregate_rating);
     const votes = props.restaurant.user_rating.votes;
     const { locality, address } = props.restaurant.location;
+
+    switch (price_range) {
+
+    }
 
     return (
         <Card className={classes.card}>
@@ -62,49 +66,48 @@ function Restaurant(props) {
                     gutterBottom>
                     { name }
                 </Typography>
-                <Box component='fieldset' mb={2} borderColor='transparent'>
+                <Box component='fieldset' mb={1} borderColor='transparent'>
                     <div className={classes.rating}>
                         <Rating value={rating} size='small' precision={0.1} readOnly />
                         <Box ml={1}>
-                            <Typography variant='caption'>
+                            <Typography variant='caption' color='textSecondary'>
                                 {rating} ({votes})
                             </Typography>
                         </Box>
                     </div>
                 </Box>
-                <Typography variant='body2'>
-                    { cuisines }
+                <Typography variant='body2' paragraph={true} >
+                    {'$'.repeat(price_range)} • { cuisines }
                 </Typography>
                 <Typography 
-                    variant='subtitle1' 
-                    gutterBottom>
+                    variant='body2' color='textSecondary' component='p' gutterBottom>
                     { locality }
                 </Typography>
                 <Typography 
-                    variant='body2' color='textSecondary' component='p'>
+                    variant='body2' color='textSecondary' component='p' gutterBottom>
                     { address }
                 </Typography>
                 <Divider className={classes.divider} light />
             </CardContent>
 
             <CardActions disableSpacing>
-                <IconButton aria-label='add to favorites'>
-                    <FavoriteIcon />
-                </IconButton>
-                
-                <Button
-                    component={Link}
-                    to={{
-                        pathname: `/restaurant/${id}`,
-                        state: {
-                            restaurant: props.restaurant
-                        }
-                    }}
-                    size='small'
-                    color='primary'>
-                        View Restaurant Details
-                </Button>
-            </CardActions>
+            <IconButton aria-label='add to favorites'>
+                <FavoriteIcon />
+            </IconButton>
+            
+            <Button
+                component={Link}
+                to={{
+                    pathname: `/restaurant/${id}`,
+                    state: {
+                        restaurant: props.restaurant
+                    }
+                }}
+                size='small'
+                color='primary'>
+                    View Restaurant Details
+            </Button>
+        </CardActions>
         </Card>
     );
 }
