@@ -12,8 +12,9 @@ class App extends React.Component {
     super();
     this.state = {
       map: null,
-      restaurants: [],
       markers: [],
+      restaurants: [],
+      filteredRestaurants: [],
       categories: [],
       neighborhoods: [],
       cuisines: [],
@@ -33,27 +34,50 @@ class App extends React.Component {
 
 
   initMap = () => {
-    const newMap = Helper.initMap();
-    this.setState({ map: newMap });
+    const map = Helper.initMap();
+    this.setState({ map });
     this.updateRestaurants();
   }
 
   
   updateRestaurants = () => {
-    Helper.fetchAllRestaurants((error, restaurants) => {
-      if (error) {
-        console.error(error);
-      } else {
-        this.setState({ restaurants }, this.addMarkersToMap);
+    const { restaurants, selectNeighborhood, selectCuisine } = this.state;
+
+    // if restaurants were fetched, filter them:
+    if (restaurants.length) {
+      let results = restaurants;
+
+      if (selectNeighborhood !== 'all') {
+        results = results.filter(item => this.matchNeighborhood(item, selectNeighborhood));
       }
-    });
+
+      if (selectCuisine !== 'all') {
+        results = results.filter(item => this.matchCuisine(item, selectCuisine));
+      }
+
+      if (selectNeighborhood !== 'all' && selectCuisine !== 'all') {
+        results = results.filter(item => this.matchNeighborhood(item, selectNeighborhood) && this.matchCuisine(item, selectCuisine));
+      }
+
+      this.setState({ filteredRestaurants: results }, this.addMarkersToMap);
+    } else {
+      // fetch all restaurants:
+      Helper.fetchAllRestaurants((error, restaurants) => {
+        if (error) {
+          console.error(error);
+        } else {
+          this.setState({ restaurants, filteredRestaurants: restaurants }, this.addMarkersToMap);
+        }
+      });
+    }
   }
 
   onSelectChange = (event) => {
     const value = event.target.value;
     const name = event.target.name;
     console.log('Option selected: ', name, value );
-    this.setState({ [ name ]: value });
+    this.setState({ [ name ]: value }, this.updateRestaurants);
+    
   }
 
 
@@ -90,12 +114,21 @@ class App extends React.Component {
   }
 
   addMarkersToMap = () => {
-    this.state.restaurants.forEach(item => {
+    // remove previous markers:
+    const { markers, map } = this.state;
+    markers.forEach(marker => map.removeLayer(marker));
+
+    const newMarkers = [];
+
+    console.log('Creating markers...');
+
+    this.state.filteredRestaurants.forEach(item => {
       const marker = Helper.createMarkerFor(item.restaurant);
-      marker.addTo(this.state.map);
-      
-      this.setState({ markers: this.state.markers.concat(marker) });
+        marker.addTo(this.state.map);
+        newMarkers.push(marker);
     });
+
+    this.setState({ markers: newMarkers });
   }
 
 
@@ -109,30 +142,30 @@ class App extends React.Component {
   }
 
 
-  filterRestaurants = (restaurants, selectCa, selectN, selectCu) => {
-    let results = restaurants;
+  // filterRestaurants = (restaurants, selectCa, selectN, selectCu) => {
+  //   let results = restaurants;
 
-    if (selectCa !== 'all') {}
+  //   if (selectCa !== 'all') {}
 
-    if (selectN !== 'all') {
-      results = results.filter(item => this.matchNeighborhood(item, selectN));
-    }
+  //   if (selectN !== 'all') {
+  //     results = results.filter(item => this.matchNeighborhood(item, selectN));
+  //   }
 
-    if (selectCu !== 'all') {
-      results = results.filter(item => this.matchCuisine(item, selectCu));
-    }
+  //   if (selectCu !== 'all') {
+  //     results = results.filter(item => this.matchCuisine(item, selectCu));
+  //   }
 
-    if (selectN !== 'all' && selectCu !== 'all') {
-      results = results.filter(item => this.matchNeighborhood(item, selectN) && this.matchCuisine(item, selectCu));
-    }
+  //   if (selectN !== 'all' && selectCu !== 'all') {
+  //     results = results.filter(item => this.matchNeighborhood(item, selectN) && this.matchCuisine(item, selectCu));
+  //   }
 
-    return results;
-  }
+  //   return results;
+  // }
 
 
   render() {
     const { 
-      restaurants,
+      filteredRestaurants,
       categories,
       neighborhoods,
       cuisines,
@@ -154,9 +187,7 @@ class App extends React.Component {
                 cuisines={cuisines}
                 onChange={this.onSelectChange} />
             <RestaurantsList 
-              restaurants={
-                this.filterRestaurants(restaurants, selectCategory, selectNeighborhood, selectCuisine)
-              } />
+              restaurants={filteredRestaurants} />
         </Grid>
       </div>
     );

@@ -43,6 +43,7 @@ class Helper {
   static createMarkerFor(restaurant) {
     const marker = new Leaflet.marker([restaurant.location.latitude, restaurant.location.longitude], {
         title: restaurant.name,
+        id: restaurant.id,
         alt: 'Marker for ' + restaurant.name,
         riseOnHover: true
       });
