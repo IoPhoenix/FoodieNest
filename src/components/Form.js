@@ -7,6 +7,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
+    justifyContent: 'center',
     margin:  `${theme.spacing(3)}px 0`
   },
   formControl: {
@@ -45,7 +46,7 @@ function Form(props) {
     return (
       <Grid container justify="center">
         <form className={classes.root}>
-          <Grid item>
+          <Grid item xs={7} sm={4}>
             <FormControl className={classes.formControl}>
               <InputLabel htmlFor="categories-select">Select category</InputLabel>
               <Select
@@ -62,7 +63,7 @@ function Form(props) {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item>
+          <Grid item xs={7} sm={4}>
           <FormControl className={classes.formControl}>
               <InputLabel htmlFor="neighborhoods-select">Select neighborhood</InputLabel>
               <Select
@@ -78,7 +79,7 @@ function Form(props) {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item>
+          <Grid item xs={7} sm={4}>
           <FormControl className={classes.formControl}>
               <InputLabel htmlFor="cuisines-select">Select cuisine</InputLabel>
               <Select

@@ -36,7 +36,10 @@ class Helper {
       id: 'mapbox.streets'
     }).addTo(map);
 
-    return map;
+    // add layer which will contain markers:
+    const layer = Leaflet.layerGroup().addTo(map);
+
+    return layer;
   }
 
 

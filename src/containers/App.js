@@ -12,6 +12,7 @@ class App extends React.Component {
     super();
     this.state = {
       map: null,
+      layer: null,
       markers: [],
       restaurants: [],
       filteredRestaurants: [],
@@ -34,8 +35,8 @@ class App extends React.Component {
 
 
   initMap = () => {
-    const map = Helper.initMap();
-    this.setState({ map });
+    const layer = Helper.initMap();
+    this.setState({ layer });
     this.updateRestaurants();
   }
 
@@ -114,9 +115,10 @@ class App extends React.Component {
   }
 
   addMarkersToMap = () => {
+    const { layer } = this.state;
+    
     // remove previous markers:
-    const { markers, map } = this.state;
-    markers.forEach(marker => map.removeLayer(marker));
+    layer.clearLayers();
 
     const newMarkers = [];
 
@@ -124,11 +126,11 @@ class App extends React.Component {
 
     this.state.filteredRestaurants.forEach(item => {
       const marker = Helper.createMarkerFor(item.restaurant);
-        marker.addTo(this.state.map);
+        marker.addTo(layer);
         newMarkers.push(marker);
     });
 
-    this.setState({ markers: newMarkers });
+    this.setState({ markers: newMarkers, layer });
   }
 
 
@@ -140,27 +142,6 @@ class App extends React.Component {
   matchCuisine = (item, search) => {
     return item.restaurant.cuisines.includes(search);
   }
-
-
-  // filterRestaurants = (restaurants, selectCa, selectN, selectCu) => {
-  //   let results = restaurants;
-
-  //   if (selectCa !== 'all') {}
-
-  //   if (selectN !== 'all') {
-  //     results = results.filter(item => this.matchNeighborhood(item, selectN));
-  //   }
-
-  //   if (selectCu !== 'all') {
-  //     results = results.filter(item => this.matchCuisine(item, selectCu));
-  //   }
-
-  //   if (selectN !== 'all' && selectCu !== 'all') {
-  //     results = results.filter(item => this.matchNeighborhood(item, selectN) && this.matchCuisine(item, selectCu));
-  //   }
-
-  //   return results;
-  // }
 
 
   render() {

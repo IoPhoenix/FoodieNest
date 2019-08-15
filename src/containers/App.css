@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+body {
+  background: #F7F7F7;
+}
+
 #map {
   height: 380px;
 }
@@ -13,4 +17,8 @@
   left: -10000px;
   top: auto;
   overflow: hidden;
+}
+
+a {
+  text-decoration: none;
 }
