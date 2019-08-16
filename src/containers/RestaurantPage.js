@@ -3,17 +3,26 @@ import Helper from '../helpers';
 import Map from '../components/Map';
 import { Link } from "react-router-dom";
 import { withStyles } from '@material-ui/core/styles';
-import { Grid, Paper, Breadcrumbs, Typography, Button} from '@material-ui/core';
+import {
+    Grid,
+    Card,
+    Paper,
+    Breadcrumbs,
+    Typography,
+    Button } from '@material-ui/core';
 import './App.css';
 
 
 const styles = (theme) => ({
-    root: {
-      justifyContent: 'center',
-      flexWrap: 'wrap',
+    container: {
+        justifyContent: 'center',
+        flexWrap: 'wrap',
+        margin: `${theme.spacing(3)}px 0`
     },
     paper: {
-      padding: theme.spacing(1, 2),
+        padding: theme.spacing(1, 2),
+    },
+    heading: {
     }
 });
 
@@ -77,7 +86,7 @@ class RestaurantPage extends React.Component {
                     <Map />
                     <Grid container justify="center" spacing={6}>
                         <Grid item xs={12} sm={8}>
-                            <div className={classes.root}>
+                            <div className={classes.container}>
                                 <Paper elevation={1} className={classes.paper}>
                                     <Breadcrumbs separator="›" aria-label="breadcrumb">
                                     <Button
@@ -96,7 +105,9 @@ class RestaurantPage extends React.Component {
                             </div>
                         </Grid>
                         <Grid item xs={12} sm={8} container spacing={6}>
-                            <Typography variant="h2">{restaurant.name}</Typography>
+                            <Card className={classes.card}>
+                                <Typography className={classes.heading} variant="h5">{restaurant.name}</Typography>
+                            </Card>
                         </Grid>
                     </Grid>
                 </div>

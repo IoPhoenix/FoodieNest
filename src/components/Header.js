@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
         background: '#ffff'
     },
     heading: {
-        fontFamily: '"Overpass", sans-serif',
+        fontFamily: "'Carter One', cursive",
         fontSize: '36px'
     },
     link: {
