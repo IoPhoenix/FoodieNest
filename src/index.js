@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './containers/App';
 import Header from './components/Header';
-import RestaurantPage from './components/RestaurantPage';
+import RestaurantPage from './containers/RestaurantPage';
 import Notfound from './components/Notfound';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 
