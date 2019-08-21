@@ -16,10 +16,8 @@ class App extends React.Component {
       markers: [],
       restaurants: [],
       filteredRestaurants: [],
-      categories: [],
       neighborhoods: [],
       cuisines: [],
-      selectCategory: 'all',
       selectNeighborhood: 'all',
       selectCuisine: 'all',
     }
@@ -28,7 +26,6 @@ class App extends React.Component {
 
   componentDidMount() {
     this.initMap();
-    this.fetchCategories();
     this.fetchNeighborhoods();
     this.fetchCuisines();
   }
@@ -47,10 +44,6 @@ class App extends React.Component {
     // if restaurants were fetched, filter them:
     if (restaurants.length) {
       let results = restaurants;
-
-      if (selectNeighborhood !== 'all') {
-        results = results.filter(item => this.matchNeighborhood(item, selectNeighborhood));
-      }
 
       if (selectCuisine !== 'all') {
         results = results.filter(item => this.matchCuisine(item, selectCuisine));
@@ -104,16 +97,6 @@ class App extends React.Component {
   }
 
 
-  fetchCategories = () => {
-    Helper.fetchCategories((error, categories) => {
-      if (error) { 
-        console.error(error);
-      } else {
-        this.setState({ categories });
-      }
-    });
-  }
-
   addMarkersToMap = () => {
     const { layer } = this.state;
     
@@ -147,10 +130,8 @@ class App extends React.Component {
   render() {
     const { 
       filteredRestaurants,
-      categories,
       neighborhoods,
       cuisines,
-      selectCategory,
       selectNeighborhood,
       selectCuisine } = this.state;
     
@@ -160,10 +141,8 @@ class App extends React.Component {
         <Map />
         <Grid container justify="center">
             <Form 
-                selectCategory={selectCategory}
                 selectNeighborhood={selectNeighborhood}
                 selectCuisine={selectCuisine}
-                categories={categories}
                 neighborhoods={neighborhoods}
                 cuisines={cuisines}
                 onChange={this.onSelectChange} />

@@ -15,14 +15,13 @@ import './App.css';
 
 const styles = (theme) => ({
     container: {
-        justifyContent: 'center',
-        flexWrap: 'wrap',
         margin: `${theme.spacing(3)}px 0`
     },
     paper: {
-        padding: theme.spacing(1, 2),
+        // padding: theme.spacing(1, 2),
     },
-    heading: {
+    card: {
+        padding: `${theme.spacing(3)}px`
     }
 });
 
@@ -84,8 +83,8 @@ class RestaurantPage extends React.Component {
             ) : (
                 <div>
                     <Map />
-                    <Grid container justify="center" spacing={6}>
-                        <Grid item xs={12} sm={8}>
+                    <Grid container justify="center" spacing={6} direction="column" alignItems="stretch">
+                        <Grid item xs={12} sm={6}>
                             <div className={classes.container}>
                                 <Paper elevation={1} className={classes.paper}>
                                     <Breadcrumbs separator="›" aria-label="breadcrumb">
@@ -104,7 +103,7 @@ class RestaurantPage extends React.Component {
                                 </Paper>
                             </div>
                         </Grid>
-                        <Grid item xs={12} sm={8} container spacing={6}>
+                        <Grid item xs={12} sm={6}>
                             <Card className={classes.card}>
                                 <Typography className={classes.heading} variant="h5">{restaurant.name}</Typography>
                             </Card>

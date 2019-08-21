@@ -29,10 +29,6 @@ function Form(props) {
             </MenuItem>;
   }
 
-  const categories = props.categories.map((category, i) => {
-    return renderOption(category, i);
-  });
-
   const neighborhoods = props.neighborhoods.map((neighborhood, i) => {
     return renderOption(neighborhood, i);
   });
@@ -46,24 +42,7 @@ function Form(props) {
     return (
       <Grid container justify="center">
         <form className={classes.root}>
-          <Grid item xs={7} sm={4}>
-            <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="categories-select">Select category</InputLabel>
-              <Select
-                value={props.selectCategory}
-                onChange={props.onChange}
-                aria-label="Select category" 
-                inputProps={{
-                  name: 'selectCategory',
-                  id: 'categories-select',
-                }}
-              >
-              <MenuItem value='all'>All Categories</MenuItem>;
-              { categories }
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={7} sm={4}>
+          <Grid item xs={7} sm={6}>
           <FormControl className={classes.formControl}>
               <InputLabel htmlFor="neighborhoods-select">Select neighborhood</InputLabel>
               <Select
@@ -79,7 +58,7 @@ function Form(props) {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item xs={7} sm={4}>
+          <Grid item xs={7} sm={6}>
           <FormControl className={classes.formControl}>
               <InputLabel htmlFor="cuisines-select">Select cuisine</InputLabel>
               <Select

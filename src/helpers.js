@@ -7,14 +7,6 @@ class Helper {
     this.restaurants = [];
   }
 
-  // static get restaurants() {
-  //   return Helper.restaurants;
-  // }
-
-  // static set restaurants(restaurants) {
-  //   Helper.restaurants = restaurants;
-  // }
-
   static get DATABASE_URL() {
     return 'https://developers.zomato.com/api/v2.1';
   }
