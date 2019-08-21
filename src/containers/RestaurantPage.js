@@ -56,7 +56,7 @@ class RestaurantPage extends React.Component {
                 if (error) {
                   console.error('Error fetching restaurant by id:: ', error);
                 } else {
-                  this.setState({ restaurant }, this.initMap(restaurant));
+                  this.setState({ restaurant });
                 }
             });
         }

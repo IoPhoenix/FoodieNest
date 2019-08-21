@@ -1,9 +1,10 @@
 import React from 'react';
 
-function Map(props) {
+function Map() {
 
     return (
-        <div id="map" role="application" aria-label="map with markers"></div>
+            <div id="map" style={{position: 'fixed'}} role="application" aria-label="map with markers"></div>
+    
     )
 }
 

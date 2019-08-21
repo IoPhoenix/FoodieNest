@@ -45,6 +45,10 @@ class App extends React.Component {
     if (restaurants.length) {
       let results = restaurants;
 
+      if (selectNeighborhood !== 'all') {
+        results = results.filter(item => this.matchNeighborhood(item, selectNeighborhood));
+      }
+
       if (selectCuisine !== 'all') {
         results = results.filter(item => this.matchCuisine(item, selectCuisine));
       }
@@ -138,16 +142,21 @@ class App extends React.Component {
 
     return (
       <div className="app">
-        <Map />
-        <Grid container justify="center">
-            <Form 
-                selectNeighborhood={selectNeighborhood}
-                selectCuisine={selectCuisine}
-                neighborhoods={neighborhoods}
-                cuisines={cuisines}
-                onChange={this.onSelectChange} />
-            <RestaurantsList 
-              restaurants={filteredRestaurants} />
+        <Grid container direction="row">
+            <Grid item xs={8} container justify="center" spacing={6}>
+              <Form 
+                  selectNeighborhood={selectNeighborhood}
+                  selectCuisine={selectCuisine}
+                  neighborhoods={neighborhoods}
+                  cuisines={cuisines}
+                  onChange={this.onSelectChange} />
+              <RestaurantsList 
+                restaurants={filteredRestaurants} />
+            </Grid>
+
+            <Grid item xs={4}>
+              <Map />
+            </Grid>
         </Grid>
       </div>
     );

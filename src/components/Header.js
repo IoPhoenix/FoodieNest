@@ -6,7 +6,9 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
     header: {
         padding: theme.spacing(3),
-        background: '#ffff'
+        background: '#ffff',
+        textAlign: 'center',
+        maxWidth: '66.666667%'
     },
     heading: {
         fontFamily: "'Carter One', cursive",

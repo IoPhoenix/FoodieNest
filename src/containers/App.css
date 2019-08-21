@@ -8,8 +8,16 @@ body {
   background: #F7F7F7;
 }
 
-#map {
-  height: 380px;
+ #map {
+  width: 33.333333%;
+  height: 100%;
+  left: auto;
+  right: 0;
+  top: 0;
+  z-index: 1;
+  position: fixed;
+  display: block;
+  background-color: #b1b1b1;
 }
 
 .sr-only {

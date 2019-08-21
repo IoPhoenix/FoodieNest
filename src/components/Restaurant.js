@@ -15,7 +15,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
     card: {
-      maxWidth: 300,
+      maxWidth: 340,
       margin: 'auto',
       transition: '0.3s',
       boxShadow: '0 8px 40px -12px rgba(0,0,0,0.3)',
