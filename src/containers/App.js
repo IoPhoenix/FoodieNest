@@ -143,7 +143,7 @@ class App extends React.Component {
     return (
       <div className="app">
         <Grid container direction="row">
-            <Grid item xs={8} container justify="center" spacing={6}>
+            <Grid item xs={8} container justify="center">
               <Form 
                   selectNeighborhood={selectNeighborhood}
                   selectCuisine={selectCuisine}

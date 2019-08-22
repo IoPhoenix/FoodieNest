@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    margin: `${theme.spacing(4)}px 0 ${theme.spacing(2)}px 0`
+    margin: `${theme.spacing(4)}px 0`
   },
   formControl: {
     margin: theme.spacing(2),
@@ -40,7 +40,7 @@ function Form(props) {
 
 
     return (
-      <Grid item container sm={6} spacing={6}>
+      <Grid item container sm={6}>
         <form className={classes.root}>
           <Grid item xs={7} sm={6}>
           <FormControl className={classes.formControl}>
