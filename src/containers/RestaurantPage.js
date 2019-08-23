@@ -31,7 +31,7 @@ const styles = (theme) => ({
         margin: `${theme.spacing(4)}px`
     },
     media: {
-        paddingTop: '63%'
+        paddingTop: '57%'
     },
     content: {
         padding: `${theme.spacing(4)}px`,
@@ -143,6 +143,11 @@ class RestaurantPage extends React.Component {
                                         <Icons url={url} menu={menu_url} photos={photos_url} />
                                     </CardActions>
 
+                                    <Divider className={classes.divider} light />
+                                    <Typography 
+                                        variant='body1' color='textPrimary' component='p' gutterBottom>
+                                        { establishment } at { locality } for ${ average_cost_for_two } for two.
+                                    </Typography>
                                     <Divider className={classes.divider} light />
                                     <Typography 
                                         variant='body2' color='textSecondary' component='p' gutterBottom>

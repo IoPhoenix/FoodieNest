@@ -12,9 +12,12 @@ const useStyles = makeStyles(theme => ({
         borderRadius: '44px',
         height: '44px',
         border: '1px solid #dadce0',
-        margin: '6px 10px',
+        margin: '0 14px',
         padding: '10px',
-        width: '44px'
+        width: '44px',
+        '&:first-child': {
+            marginLeft: '0',
+        }
     }
 }));
 
