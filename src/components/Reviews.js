@@ -1,11 +1,9 @@
 import React from 'react';
-import { Grid, Typography, List } from '@material-ui/core';
+import { Typography, List } from '@material-ui/core';
 import Review from './Review';
 
 
 function Reviews(props) {
-
-    console.log('Reviews are: ', props.reviews);
 
     return (
         <List>
@@ -16,7 +14,7 @@ function Reviews(props) {
             </Typography>
             { props.reviews.map(item => {
                 return (
-                    <Review review={item.review} />
+                    <Review review={item.review} key={item.review.id} />
                 );
             })}
         </List>

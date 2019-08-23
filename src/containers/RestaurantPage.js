@@ -106,39 +106,39 @@ class RestaurantPage extends React.Component {
 
         return (
             <Card className={classes.card}>
-                                <CardMedia
-                                        alt={`${name}`}
-                                        className={classes.media}
-                                        image={ featured_image } />
-                                <CardContent className={classes.content}>
-                                    <Typography
-                                        component='h2'
-                                        variant={'h5'}
-                                        gutterBottom>
-                                        { name }
-                                    </Typography>
-                                    <UserRating 
-                                        rating={rating}
-                                        votes={votes}
-                                     />
-                                    <Typography variant='body1' paragraph={true} >
-                                        {'$'.repeat(price_range)} • { cuisines }
-                                    </Typography>
-                                    <Divider className={classes.divider} light />
+                <CardMedia
+                        alt={name}
+                        className={classes.media}
+                        image={ featured_image } />
+                <CardContent className={classes.content}>
+                    <Typography
+                        component='h2'
+                        variant={'h5'}
+                        gutterBottom>
+                        { name }
+                    </Typography>
+                    <UserRating 
+                        rating={rating}
+                        votes={votes}
+                        />
+                    <Typography variant='body1' paragraph={true} >
+                        {'$'.repeat(price_range)} • { cuisines }
+                    </Typography>
+                    <Divider className={classes.divider} light />
 
-                                    <CardActions disableSpacing>
-                                        <Icons url={url} menu={menu_url} photos={photos_url} />
-                                    </CardActions>
+                    <CardActions disableSpacing>
+                        <Icons url={url} menu={menu_url} photos={photos_url} />
+                    </CardActions>
 
-                                    <Divider className={classes.divider} light />
-                                    <Typography 
-                                        variant='body1' color='textPrimary' component='p' gutterBottom>
-                                        { establishment } at { locality } for ${ average_cost_for_two } for two.
-                                    </Typography>
-                                    <Divider className={classes.divider} light />
-                                    <Reviews reviews={reviews} />
-                                </CardContent>
-                            </Card>
+                    <Divider className={classes.divider} light />
+                    <Typography 
+                        variant='body1' color='textPrimary' component='p' gutterBottom>
+                        { establishment } at { locality } for ${ average_cost_for_two } for two.
+                    </Typography>
+                    <Divider className={classes.divider} light />
+                    <Reviews reviews={reviews} />
+                </CardContent>
+            </Card>
         )
     }
 

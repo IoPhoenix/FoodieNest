@@ -21,7 +21,7 @@ function UserRating(props) {
                 <Rating value={props.rating} size='small' precision={0.1} readOnly />
                 <Box ml={1}>
                     <Typography variant='caption' color='textSecondary'>
-                        {props.rating} ({props.votes})
+                        {props.rating} { props.votes ? '(' + props.votes + ')' : ''}
                     </Typography>
                 </Box>
             </div>

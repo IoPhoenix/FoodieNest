@@ -1,13 +1,15 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { 
-    
-        Typography,
-        Divider } from '@material-ui/core';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
+    ListItem,
+    ListItemText,
+    Typography,
+    ListItemAvatar,
+    Avatar,
+    Divider
+ } from '@material-ui/core';
+import UserRating from '../components/UserRating';
+
 
 const useStyles = makeStyles(theme => ({
   inline: {
@@ -18,7 +20,7 @@ const useStyles = makeStyles(theme => ({
 
 function Review(props) {
     const classes = useStyles();
-    const { id, rating, rating_text, review_text, review_time_friendly, timestamp } = props.review;
+    const { rating, rating_text, review_text } = props.review;
     const { name, profile_image } = props.review.user;
     
     return (
@@ -31,6 +33,7 @@ function Review(props) {
                     primary={rating_text}
                     secondary={
                         <>
+                        <UserRating rating={rating} />
                         <Typography
                             component="span"
                             variant="body2"
