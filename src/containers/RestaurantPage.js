@@ -2,6 +2,8 @@ import React from 'react';
 import Helper from '../helpers';
 import Map from '../components/Map';
 import Icons from '../components/Icons';
+import Reviews from '../components/Reviews';
+import UserRating from '../components/UserRating';
 import { withStyles } from '@material-ui/core/styles';
 import { 
     Grid,
@@ -14,9 +16,7 @@ import {
     Typography,
     Link,
     Divider,
-    Box,
     Button } from '@material-ui/core';
-import Rating from '@material-ui/lab/Rating';
 import './App.css';
 
 
@@ -36,11 +36,6 @@ const styles = (theme) => ({
     content: {
         padding: `${theme.spacing(4)}px`,
         textAlign: 'left'
-    },
-    rating: {
-        width: 200,
-        display: 'flex',
-        alignItems: 'center',
     },
     divider: {
       margin: `${theme.spacing(2)}px 0`
@@ -101,15 +96,13 @@ class RestaurantPage extends React.Component {
                 featured_image,
                 cuisines,
                 price_range,
-                phone_numbers,
                 establishment,
                 menu_url,
-                highlights,
                 average_cost_for_two } = restaurant;
-         const { reviews } = restaurant.all_reviews;
+        const { reviews } = restaurant.all_reviews;
         const rating = parseFloat(restaurant.user_rating.aggregate_rating);
         const votes = restaurant.user_rating.votes;
-        const { zipcode, city, locality, address } = restaurant.location;
+        const { locality } = restaurant.location;
 
         return (
             <Card className={classes.card}>
@@ -124,16 +117,10 @@ class RestaurantPage extends React.Component {
                                         gutterBottom>
                                         { name }
                                     </Typography>
-                                    <Box component='fieldset' mb={1} borderColor='transparent'>
-                                        <div className={classes.rating}>
-                                            <Rating value={rating} size='small' precision={0.1} readOnly />
-                                            <Box ml={1}>
-                                                <Typography variant='caption' color='textSecondary'>
-                                                    {rating} ({votes})
-                                                </Typography>
-                                            </Box>
-                                        </div>
-                                    </Box>
+                                    <UserRating 
+                                        rating={rating}
+                                        votes={votes}
+                                     />
                                     <Typography variant='body1' paragraph={true} >
                                         {'$'.repeat(price_range)} • { cuisines }
                                     </Typography>
@@ -149,14 +136,7 @@ class RestaurantPage extends React.Component {
                                         { establishment } at { locality } for ${ average_cost_for_two } for two.
                                     </Typography>
                                     <Divider className={classes.divider} light />
-                                    <Typography 
-                                        variant='body2' color='textSecondary' component='p' gutterBottom>
-                                        { locality }
-                                    </Typography>
-                                    <Typography 
-                                        variant='body2' color='textSecondary' component='p' gutterBottom>
-                                        { address }
-                                    </Typography>
+                                    <Reviews reviews={reviews} />
                                 </CardContent>
                             </Card>
         )
