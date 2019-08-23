@@ -32,7 +32,7 @@ class App extends React.Component {
 
 
   initMap = () => {
-    const layer = Helper.initMap();
+    const layer = Helper.initMapAndReturnLayer();
     this.setState({ layer });
     this.updateRestaurants();
   }

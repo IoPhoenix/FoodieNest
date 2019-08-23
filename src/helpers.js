@@ -12,7 +12,7 @@ class Helper {
   }
 
 
-  static initMap = () => {
+  static initMapAndReturnLayer = () => {
     const map = Leaflet.map('map', {
       center: [37.7742, -122.417068],
       zoom: 12,
