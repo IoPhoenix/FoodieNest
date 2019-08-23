@@ -142,10 +142,6 @@ class RestaurantPage extends React.Component {
         )
     }
 
-    renderRestaurantReviews = (reviews) => {
-
-    }
-
     render() {
         const { restaurant } = this.state;
         const { classes } = this.props;
