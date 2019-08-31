@@ -8,7 +8,11 @@ const useStyles = makeStyles(theme => ({
         padding: theme.spacing(3),
         background: '#ffff',
         textAlign: 'center',
-        maxWidth: '66.666667%'
+        maxWidth: '100%',
+        height: '80px',
+        [theme.breakpoints.up('sm')]: {
+            maxWidth: '66.666667%',
+        }
     },
     heading: {
         fontFamily: "'Carter One', cursive",

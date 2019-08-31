@@ -6,10 +6,10 @@ import { Grid } from "@material-ui/core";
 function RestaurantsList(props) {
 
     return (
-        <Grid item xs={12} sm={10} container spacing={6}>
+        <Grid item xs={12} sm={10} container justify="center" spacing={6} id="restaurants-container">
             { props.restaurants.map(item => {
                 return (
-                    <Grid item xs={12} sm={6} key={item.restaurant.id}>
+                    <Grid item xs={10} sm={6} key={item.restaurant.id}>
                         <Restaurant restaurant={item.restaurant}/>
                     </Grid>
                 )})

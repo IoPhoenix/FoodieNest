@@ -160,10 +160,7 @@ class RestaurantPage extends React.Component {
                                 <Paper elevation={1} className={classes.paper}>
                                     <Breadcrumbs separator="›" aria-label="breadcrumb">
                                     <Button
-                                        component={Link}
-                                        to={{
-                                            pathname: '/',
-                                        }}
+                                        href='/'
                                         color='primary'>
                                         Home
                                     </Button>
