@@ -149,7 +149,7 @@ class App extends React.Component {
                     <Grid
                         item
                         xs={12}
-                        sm={8}
+                        md={8}
                         container
                         justify="center"
                         id="main-container">
@@ -163,7 +163,7 @@ class App extends React.Component {
                         <RestaurantsList restaurants={filteredRestaurants} />
                     </Grid>
 
-                    <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} md={4}>
                         <Map />
                     </Grid>
                 </Grid>

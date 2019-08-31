@@ -17,7 +17,11 @@ const useStyles = makeStyles(theme => ({
     },
     formControl: {
         margin: theme.spacing(2),
-        minWidth: 200
+        minWidth: 200,
+        width: '100%',
+        [theme.breakpoints.up('sm')]: {
+          width: 'auto',
+      }
     }
 }));
 
@@ -41,15 +45,15 @@ function Form(props) {
     });
 
     return (
-        <Grid item container xs={12} md={7} lg={6}>
+        <Grid item container justify="center" xs={12} sm={10} >
             <form className={classes.root}>
-                <Grid item xs={8} md={6}>
-                    <FormControl fullWidth className={classes.formControl}>
+                <Grid item xs={8} sm={6}>
+                    <FormControl className={classes.formControl}>
                         <InputLabel htmlFor="neighborhoods-select">
                             Select neighborhood
                         </InputLabel>
                         <Select
-                            fullWidth
+                            
                             value={props.selectNeighborhood}
                             onChange={props.onChange}
                             aria-label="Select neighborhood"
@@ -62,13 +66,13 @@ function Form(props) {
                         </Select>
                     </FormControl>
                 </Grid>
-                <Grid item xs={8} md={6}>
-                    <FormControl fullWidth className={classes.formControl}>
+                <Grid item xs={8} sm={6}>
+                    <FormControl className={classes.formControl}>
                         <InputLabel htmlFor="cuisines-select">
                             Select cuisine
                         </InputLabel>
                         <Select
-                            fullWidth
+                            
                             value={props.selectCuisine}
                             onChange={props.onChange}
                             aria-label="Select cuisine"

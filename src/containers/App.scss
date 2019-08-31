@@ -21,7 +21,7 @@ body {
     position: relative;
     background-color: #b1b1b1;
     
-    @include atSmall {
+    @include atMedium {
         position: fixed;
         width: 33.333333%;
         height: 100%;
