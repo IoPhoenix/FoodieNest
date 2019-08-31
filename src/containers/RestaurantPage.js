@@ -14,7 +14,6 @@ import {
     CardActions,
     CardMedia,
     Typography,
-    Link,
     Divider,
     Button } from '@material-ui/core';
 import './App.css';
@@ -65,7 +64,7 @@ class RestaurantPage extends React.Component {
         // use it to populate local state
         if (restaurant) {
             console.log('Restaurant object was passed successfully!');
-            this.setState({ restaurant }, this.initMap(restaurant));
+            this.setState({ restaurant }, () => this.initMap(restaurant));
         } else {
             console.log('Fetching restaurant by id...');
 
@@ -74,7 +73,7 @@ class RestaurantPage extends React.Component {
                 if (error) {
                   console.error('Error fetching restaurant by id:: ', error);
                 } else {
-                  this.setState({ restaurant }, this.initMap(restaurant));
+                  this.setState({ restaurant }, () => this.initMap(restaurant));
                 }
             });
         }
@@ -152,10 +151,9 @@ class RestaurantPage extends React.Component {
                     <h1>Loading...</h1>
                 </div>
             ) : (
-                <div>
-                    <Map />
-                    <Grid container justify="center" direction="column" alignItems="stretch">
-                        <Grid item xs={12} sm={8}>
+                <Grid container direction="column-reverse">
+                    <Grid item container justify="center" xs={12} md={8}>
+                        <Grid item xs={12} sm={8} md={10}>
                             <div className={classes.container}>
                                 <Paper elevation={1} className={classes.paper}>
                                     <Breadcrumbs separator="›" aria-label="breadcrumb">
@@ -171,11 +169,15 @@ class RestaurantPage extends React.Component {
                                 </Paper>
                             </div>
                         </Grid>
-                        <Grid item xs={12} sm={8}>
+                        <Grid item xs={12} sm={8} md={10}>
                             { this.renderRestaurantCard(restaurant) }
                         </Grid>
                     </Grid>
-                </div>
+
+                    <Grid item xs={12} md={4}>
+                        <Map />
+                    </Grid>
+                </Grid>
             )
     }
 }
